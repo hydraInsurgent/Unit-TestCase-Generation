@@ -1,0 +1,6 @@
+@UnitTestCaseGeneration_POC.Server_HostAddress = http://localhost:5038
+
+GET {{UnitTestCaseGeneration_POC.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

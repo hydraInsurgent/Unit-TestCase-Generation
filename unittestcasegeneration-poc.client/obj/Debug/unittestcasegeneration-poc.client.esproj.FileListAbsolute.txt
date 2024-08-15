@@ -1,0 +1,1 @@
+C:\Users\Administrator\source\repos\UnitTestCaseGeneration-POC\unittestcasegeneration-poc.client\obj\Debug\unittestcasegeneration-poc.client.esproj.CoreCompileInputs.cache
