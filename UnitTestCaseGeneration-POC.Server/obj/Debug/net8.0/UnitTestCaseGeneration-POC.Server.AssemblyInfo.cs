@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UnitTestCaseGeneration-POC.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2fa9ac98f06acd21de90d104271ba2c385c0f4e8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b406940266edc7b6996f203d404eaafd3247bc94")]
 [assembly: System.Reflection.AssemblyProductAttribute("UnitTestCaseGeneration-POC.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UnitTestCaseGeneration-POC.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
