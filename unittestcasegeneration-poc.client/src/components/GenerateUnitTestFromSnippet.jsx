@@ -27,7 +27,7 @@ function GenerateUnitTestFromSnippet() {
             showLineNumbers={true}
             theme='atom-one-dark'
         />
-        createRoot(document.querySelector("#snippetOutput")).render(output)
+        createRoot(document.querySelector("#snippetOutputSection")).render(output)
         console.log(data)
     }
     return (
@@ -35,29 +35,26 @@ function GenerateUnitTestFromSnippet() {
             <header>
                 <h1>Snippet Uploader</h1>
             </header>
-            <form action="#" method="post"  >
-                <div className="form-group">
-                    <label>Input Code</label>
-                    <textarea 
-                        id="codeSnippet"
-                        name="codeSnippet"
-                        value={inputData.codeSnippet}
-                        onChange={handleData}
-                        cols="40" 
-                        rows="5"
-                    ></textarea>
-                    
-                    {/* <input
-                        type="text"
-                        id="codeSnippet"
-                        name="codeSnippet"
-                        value={inputData.codeSnippet}
-                        onChange={handleData}
-                    /> */}
-                    <br />
-                    <button onClick={uploadSnippet} >Submit</button>
-                </div>
-            </form>
+            <div id="snippetInputSection">
+                <form action="#" method="post"  >
+                    <div className="form-group">
+                        <label>Input Code</label>
+                        <textarea 
+                            id="codeSnippet"
+                            name="codeSnippet"
+                            value={inputData.codeSnippet}
+                            onChange={handleData}
+                            cols="40" 
+                            rows="5"
+                        ></textarea>
+                        <br />
+                        <button onClick={uploadSnippet} >Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div id="snippetOutputSection">
+                
+            </div>
 
         </div>
     )

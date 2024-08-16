@@ -9,15 +9,20 @@ function GenerateUnitTestFromFile() {
             <header>
                 <h1>File Uploader</h1>
             </header>
-            <form action="#" method="post" onSubmit={uploadFile}>
-                <label htmlFor="file">Select File(s)</label>
-                <br />
-                <input type="file" id="file" required name="uploadFile"/>
+            <div id="snippetInputSection">
+                <form action="#" method="post" onSubmit={uploadFile}>
+                    <label htmlFor="file">Select File(s)</label>
+                    <br />
+                    <input type="file" id="file" required name="uploadFile"/>
 
-                <br />
-                <input type="submit" value="Upload" />
-            </form>
-
+                    <br />
+                    <input type="submit" value="Upload" />
+                </form>
+            </div>
+            <div id="fileOutputSection">
+                
+            </div>
+            
         </div>
     )
 
@@ -35,7 +40,7 @@ function GenerateUnitTestFromFile() {
             showLineNumbers={true}
             theme='atom-one-dark'
         />
-        createRoot(document.querySelector("#fileOutput")).render(createRoot)
+        createRoot(document.querySelector("#fileOutputSection")).render(output)
         console.log(data)
     }
 }

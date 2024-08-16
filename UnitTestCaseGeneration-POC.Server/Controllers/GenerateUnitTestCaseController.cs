@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using OpenAI;
 using OpenAI.Chat;
 using System.Text;
 using UnitTestCaseGeneration_POC.Server.Models;
@@ -18,41 +19,50 @@ namespace UnitTestCaseGeneration_POC.Server.Controllers
 
         [EnableCors("AllowOrigin")]
         [HttpPost("GenerateUnitTestFromSnippet")]
-        public JsonResult GenerateUnitTestFromSnippet([FromBody] SnippetInput snippetInput)
+        public async Task<JsonResult> GenerateUnitTestFromSnippet([FromBody] SnippetInput snippetInput)
         {
             try
             {
                 ChatClient client = new(model: "gpt-3.5-turbo", Environment.GetEnvironmentVariable("OPENAI_API_KEY"));
 
-                ChatCompletion chatCompletion = client.CompleteChat(
-                    [new UserChatMessage("Say 'this is a test.'")]);
+                SystemChatMessage systemMessage = new SystemChatMessage("You are a helpful assistant, who generates unit tests cases and unit test code from code snippet provided. Please generate a comprehensive unit tests for the given code snippet in the same language.");
+                UserChatMessage userPrompt = new UserChatMessage(snippetInput.CodeSnippet);
+
+                ChatCompletion chatCompletion = await client.CompleteChatAsync([systemMessage, userPrompt]);
                 return new JsonResult(new { success = true, output = chatCompletion.ToString() });
             }
             catch (Exception ex)
             {
-                return new JsonResult(new { success = false, output = "Error generating from snippet." });
+                return new JsonResult(new { success = false, output = $"Error generating from the given snippet. {ex.Message}" });
             }
         }
 
         [HttpPost("GenerateUnitTestFromFile")]
-        public JsonResult GenerateUnitTestFromFile(FileInput inputFile)
+        public async Task<JsonResult> GenerateUnitTestFromFile(FileInput inputFile)
         {
             try
             {
                 // Read file using StreamReader. Reads file line by line
-                var result = new StringBuilder();
+                var prompt = new StringBuilder();
                 using (var reader = new StreamReader(inputFile.uploadFile.OpenReadStream()))
                 {
                     while (reader.Peek() >= 0)
                     {
-                        result.AppendLine(reader.ReadLine());
+                        prompt.AppendLine(reader.ReadLine());
                     }
                 }
-                return new JsonResult(new { success = true, output = result.ToString() });
+
+                ChatClient client = new(model: "gpt-3.5-turbo", Environment.GetEnvironmentVariable("OPENAI_API_KEY"));
+
+                SystemChatMessage systemMessage = new SystemChatMessage("You are a helpful assistant, who generates unit tests cases and unit test code from code snippet provided. Please generate a comprehensive unit tests for the given code snippet in the same language.");
+                UserChatMessage userPrompt = new UserChatMessage(prompt.ToString());
+
+                ChatCompletion chatCompletion = await client.CompleteChatAsync([systemMessage, userPrompt]);
+                return new JsonResult(new { success = true, output = chatCompletion.ToString() });
             }
             catch (Exception ex)
             {
-                return new JsonResult(new { success = false, output = "Error generating from file." });
+                return new JsonResult(new { success = false, output = $"Error generating from the given file. {ex.Message}" });
             }
         }
 
