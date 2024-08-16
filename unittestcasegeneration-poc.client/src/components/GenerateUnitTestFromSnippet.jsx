@@ -31,31 +31,38 @@ function GenerateUnitTestFromSnippet() {
         console.log(data)
     }
     return (
-        <div>
+        <div >
             <header>
-                <h1>Snippet Uploader</h1>
+                <h1 className="text-center mb-4">Snippet Uploader</h1>
             </header>
-            <div id="snippetInputSection">
-                <form action="#" method="post"  >
-                    <div className="form-group">
-                        <label>Input Code</label>
-                        <textarea 
-                            id="codeSnippet"
-                            name="codeSnippet"
-                            value={inputData.codeSnippet}
-                            onChange={handleData}
-                            cols="40" 
-                            rows="5"
-                        ></textarea>
-                        <br />
-                        <button onClick={uploadSnippet} >Submit</button>
-                    </div>
-                </form>
-            </div>
-            <div id="snippetOutputSection">
-                
-            </div>
+            <div className="row">
+                {/* Input Section on the Left */}
+                <div id="snippetInputSection" className="col-md-6">
+                    <form action="#" method="post">
+                        <div className="form-group">
+                            <label htmlFor="codeSnippet">Input Code</label>
+                            <textarea
+                                id="codeSnippet"
+                                name="codeSnippet"
+                                className="form-control"
+                                value={inputData.codeSnippet}
+                                onChange={handleData}
+                                cols="300"
+                                rows="20"
+                            ></textarea>
+                            <br />
+                            <button className="btn btn-primary" onClick={uploadSnippet}>
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
 
+                {/* Output Section on the Right */}
+                <div id="snippetOutputSection" className="col-md-6">
+                    {/* The output code block will be rendered here */}
+                </div>
+            </div>
         </div>
     )
 
