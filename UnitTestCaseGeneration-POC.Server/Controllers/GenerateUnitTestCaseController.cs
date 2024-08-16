@@ -25,7 +25,7 @@ namespace UnitTestCaseGeneration_POC.Server.Controllers
             {
                 ChatClient client = new(model: "gpt-3.5-turbo", Environment.GetEnvironmentVariable("OPENAI_API_KEY"));
 
-                SystemChatMessage systemMessage = new SystemChatMessage("You are a helpful assistant, who generates unit tests cases and unit test code from code snippet provided. Please generate a comprehensive unit tests for the given code snippet in the same language.");
+                SystemChatMessage systemMessage = new SystemChatMessage("You are a helpful assistant, who generates unit tests cases and unit test code from a code snippet provided to you in the same language. Start with generating a comprehensive list of unit test cases for the supplied code followed by the unit test code for each of the identified test cases.");
                 UserChatMessage userPrompt = new UserChatMessage(snippetInput.CodeSnippet);
 
                 ChatCompletion chatCompletion = await client.CompleteChatAsync([systemMessage, userPrompt]);
@@ -54,7 +54,7 @@ namespace UnitTestCaseGeneration_POC.Server.Controllers
 
                 ChatClient client = new(model: "gpt-3.5-turbo", Environment.GetEnvironmentVariable("OPENAI_API_KEY"));
 
-                SystemChatMessage systemMessage = new SystemChatMessage("You are a helpful assistant, who generates unit tests cases and unit test code from code snippet provided. Please generate a comprehensive unit tests for the given code snippet in the same language.");
+                SystemChatMessage systemMessage = new SystemChatMessage("You are a helpful assistant, who generates unit tests cases and unit test code from a code snippet provided to you in the same language. Start with generating a comprehensive list of unit test cases for the supplied code followed by the unit test code for each of the identified test cases.");
                 UserChatMessage userPrompt = new UserChatMessage(prompt.ToString());
 
                 ChatCompletion chatCompletion = await client.CompleteChatAsync([systemMessage, userPrompt]);
