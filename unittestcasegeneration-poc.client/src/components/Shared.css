@@ -2,22 +2,21 @@
 .container {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Aligns content to the top */
+    align-items: flex-start; 
     height: 100%;
     width: 100%;
   }
   
   /* Input section on the left */
   #snippetInputSection {
-    flex: 1; /* Take up equal space */
-    max-width: 48%; /* Ensures it doesn't take more than half the width */
-    padding: 20px;
+    flex: 1; 
+    max-width: 48%; 
     border-right: 1px solid #ccc;
   }
   
   #snippetInputSection textarea {
     width: 100%;
-    height: 200px; /* Fixed height for better layout */
+    height: 300px;
     margin-bottom: 10px;
   }
   
@@ -27,9 +26,9 @@
   
   /* Output section on the right */
   #snippetOutputSection {
-    flex: 1; /* Take up equal space */
-    max-width: 48%; /* Ensures it doesn't take more than half the width */
-    min-height: 200px; /* Ensure it matches the height of the textarea */
+    flex: 1; 
+    min-width: 48%; 
+    min-height: 300px; 
     border: 1px solid #646cff;
     padding: 10px;
     color: white;
@@ -43,12 +42,78 @@
   /* For responsive adjustments */
   @media (max-width: 768px) {
     .container {
-      flex-direction: column; /* Stack sections vertically on smaller screens */
+      flex-direction: column; 
     }
   
     #snippetInputSection,
     #snippetOutputSection {
-      max-width: 100%; /* Ensure full width on small screens */
+      max-width: 100%;
     }
   }
-  
+ 
+  /* Container for the entire file upload section */
+.container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    width: 100%;
+    min-width: 1200px; 
+    padding: 20px;
+    margin: 0 auto; 
+}
+/* Input section */
+#fileInputSection {
+    width: 100%; 
+    max-width: 600px; 
+
+    border-bottom: 1px solid #ccc;
+}
+
+
+/* Form styling */
+#fileInputSection form {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    width: 100%;
+    max-width: 400px; 
+}
+
+/* Form group styling */
+#fileInputSection .form-group {
+    width: 100%;
+    text-align: center; 
+    margin-bottom: 20px;
+}
+
+/* Input button alignment */
+#fileInputSection input[type="file"]{
+    padding-left: 100px;
+}
+#fileInputSection input[type="submit"] {
+    width: 50%;
+}
+
+/* Output section */
+#fileOutputSection {
+    width: 100%; 
+    max-width: 600px; 
+    max-height: 300px; 
+    min-height: 300px; 
+    border: 1px solid #646cff;
+    padding: 20px;
+    background-color: #f7f7f7;
+    overflow-y: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px; 
+    }
+
+    #fileInputSection,
+    #fileOutputSection {
+        max-width: 100%; 
+    }
+}

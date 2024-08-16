@@ -1,28 +1,25 @@
 import { createRoot } from 'react-dom/client'
-import { CodeBlock } from "react-code-blocks";
-
+import RenderOutput  from './RenderOutput'
 import './Shared.css';
 
 function GenerateUnitTestFromFile() {
     return (
-        <div>
-            <header>
-                <h1>File Uploader</h1>
+        <div className="container">
+            <header className="text-center">
+                <h3>Generate Unit Tests from Code File</h3>
             </header>
-            <div id="snippetInputSection">
+            <div id="fileInputSection" className="d-flex justify-content-center my-4">
                 <form action="#" method="post" onSubmit={uploadFile}>
-                    <label htmlFor="file">Select File(s)</label>
-                    <br />
-                    <input type="file" id="file" required name="uploadFile"/>
-
-                    <br />
-                    <input type="submit" value="Upload" />
+                    <div className="form-group text-center">
+                        <h5 >Select File</h5>
+                        <input type="file" id="file" required name="uploadFile" className="form-control-file"/>
+                    </div>
+                    <div className="form-group text-center">
+                        <input type="submit" value="Generate" className="btn btn-primary"/>
+                    </div>
                 </form>
             </div>
-            <div id="fileOutputSection">
-                
-            </div>
-            
+            <div id="fileOutputSection" className="mx-auto"></div>
         </div>
     )
 
@@ -34,13 +31,8 @@ function GenerateUnitTestFromFile() {
             body: formData
         });
         const data = await response.json();
-        var output = <CodeBlock
-            text= {data.output}
-            language='javascript'
-            showLineNumbers={true}
-            theme='atom-one-dark'
-        />
-        createRoot(document.querySelector("#fileOutputSection")).render(output)
+        
+        createRoot(document.querySelector("#fileOutputSection")).render(<RenderOutput content = {data.output} />)
         console.log(data)
     }
 }
