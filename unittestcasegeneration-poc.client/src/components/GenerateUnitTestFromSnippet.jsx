@@ -28,6 +28,7 @@ function GenerateUnitTestFromSnippet() {
                                 className="form-control"
                                 value={inputData.codeSnippet}
                                 onChange={handleData}
+                                required
                                 cols="300"
                                 rows="20"
                             ></textarea>

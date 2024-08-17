@@ -30,13 +30,13 @@ namespace UnitTestCaseGeneration_POC.Server.Controllers
         {
             try
             {
-                if (snippetInput?.CodeSnippet != null)
+                if (snippetInput?.CodeSnippet != null && !string.IsNullOrEmpty(snippetInput?.CodeSnippet))
                 {
                     return await _openAIService.GenerateUnitTestCases(snippetInput.CodeSnippet);
                 }
                 else
                 {
-                    return new JsonResult(new { success = false, output = $"Code snippet is Invalid. Please check the input." });
+                    return new JsonResult(new { success = false, output = $"Code snippet is Empty. Please check the input." });
                 }
             }
             catch (Exception ex)
@@ -66,7 +66,7 @@ namespace UnitTestCaseGeneration_POC.Server.Controllers
                 }
                 else
                 {
-                    return new JsonResult(new { success = false, output = $"File supplied is Invalid. Please check the input." });
+                    return new JsonResult(new { success = false, output = $"File supplied is Empty. Please check the input." });
                 }
             }
             catch (Exception ex)

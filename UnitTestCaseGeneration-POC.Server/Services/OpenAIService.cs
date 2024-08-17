@@ -13,7 +13,7 @@ namespace UnitTestCaseGeneration_POC.Server.Services
             {
                 ChatClient client = new(model: "gpt-3.5-turbo", Environment.GetEnvironmentVariable("OPENAI_API_KEY"));
 
-                SystemChatMessage systemMessage = new SystemChatMessage("You are a helpful assistant, who generates unit tests cases and unit test code from a code snippet provided to you in the same language. Start with generating a comprehensive list of unit test cases for the supplied code followed by the unit test code for each of the identified test cases.");
+                SystemChatMessage systemMessage = new SystemChatMessage("You are a helpful assistant, who generates unit tests cases and unit test code from a code snippet provided to you in the same language. Start with generating a comprehensive list of unit test cases for the supplied code followed by the unit test code for each of the identified test cases. In the event user has not provided a code example then respond politely asking to enter a valid code example.");
                 UserChatMessage userPrompt = new UserChatMessage(prompt);
 
                 ChatCompletion chatCompletion = await client.CompleteChatAsync([systemMessage, userPrompt]);
