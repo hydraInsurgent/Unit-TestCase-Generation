@@ -12,6 +12,7 @@
     flex: 1;
     max-width: 48%;
     border-right: 1px solid #ccc;
+    padding-left: 40px;
 }
 
     #snippetInputSection textarea {
