@@ -7,6 +7,7 @@ using OpenAI;
 using OpenAI.Chat;
 using System.Text;
 using UnitTestCaseGeneration_POC.Server.Models;
+using UnitTestCaseGeneration_POC.Server.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,6 +17,12 @@ namespace UnitTestCaseGeneration_POC.Server.Controllers
     [ApiController]
     public class GenerateUnitTestCaseController : ControllerBase
     {
+        private readonly IOpenAIService _openAIService;
+
+        public GenerateUnitTestCaseController(IOpenAIService openAIService)
+        {
+            _openAIService = openAIService;
+        }
 
         [EnableCors("AllowOrigin")]
         [HttpPost("GenerateUnitTestFromSnippet")]
@@ -23,13 +30,14 @@ namespace UnitTestCaseGeneration_POC.Server.Controllers
         {
             try
             {
-                ChatClient client = new(model: "gpt-3.5-turbo", Environment.GetEnvironmentVariable("OPENAI_API_KEY"));
-
-                SystemChatMessage systemMessage = new SystemChatMessage("You are a helpful assistant, who generates unit tests cases and unit test code from a code snippet provided to you in the same language. Start with generating a comprehensive list of unit test cases for the supplied code followed by the unit test code for each of the identified test cases.");
-                UserChatMessage userPrompt = new UserChatMessage(snippetInput.CodeSnippet);
-
-                ChatCompletion chatCompletion = await client.CompleteChatAsync([systemMessage, userPrompt]);
-                return new JsonResult(new { success = true, output = chatCompletion.ToString() });
+                if (snippetInput?.CodeSnippet != null)
+                {
+                    return await _openAIService.GenerateUnitTestCases(snippetInput.CodeSnippet);
+                }
+                else
+                {
+                    return new JsonResult(new { success = false, output = $"Code snippet is Invalid. Please check the input." });
+                }
             }
             catch (Exception ex)
             {
@@ -52,13 +60,14 @@ namespace UnitTestCaseGeneration_POC.Server.Controllers
                     }
                 }
 
-                ChatClient client = new(model: "gpt-3.5-turbo", Environment.GetEnvironmentVariable("OPENAI_API_KEY"));
-
-                SystemChatMessage systemMessage = new SystemChatMessage("You are a helpful assistant, who generates unit tests cases and unit test code from a code snippet provided to you in the same language. Start with generating a comprehensive list of unit test cases for the supplied code followed by the unit test code for each of the identified test cases.");
-                UserChatMessage userPrompt = new UserChatMessage(prompt.ToString());
-
-                ChatCompletion chatCompletion = await client.CompleteChatAsync([systemMessage, userPrompt]);
-                return new JsonResult(new { success = true, output = chatCompletion.ToString() });
+                if (!string.IsNullOrEmpty(prompt?.ToString()))
+                {
+                    return await _openAIService.GenerateUnitTestCases(prompt.ToString());
+                }
+                else
+                {
+                    return new JsonResult(new { success = false, output = $"File supplied is Invalid. Please check the input." });
+                }
             }
             catch (Exception ex)
             {
