@@ -6,7 +6,12 @@
 
 The Unit Test Case Generator is a Generative AI-based tool that automates the creation of unit test cases from provided code snippets or entire code files. It uses OpenAI's GPT-3.5-turbo model via the ChatCompleteAsync API, the system generates both the test case scenarios and the corresponding unit test code. The project is implemented with a .NET Core Web API backend and a React-based frontend. 
 
- 
+### Demo 
+**Generate unit tests from code**
+![image](https://github.com/user-attachments/assets/92aae8a2-dd2d-4805-976b-1296cc74049d)
+
+**Generate unit tests from a file**
+![image](https://github.com/user-attachments/assets/98b2f5c2-dfc1-4da4-8dc8-6ead8b17e628)
 
 ## Solution Approach 
 
